@@ -1,20 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="31cb53df-75cb-4f75-8eda-5f91be4c5bd9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/mongo_java_driver_3_2_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProyectoPeliculas.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/proyecto/BuscarPeliculas.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/proyecto/Comprobar.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/proyecto/ModificarGenero.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/proyecto/ModificarPelicula.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/proyecto/Principal.java" afterDir="false" />
+    <list default="true" id="31cb53df-75cb-4f75-8eda-5f91be4c5bd9" name="Changes" comment="CRUD v1">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8a7f431f-6109-4d56-81b9-e63d4f6e5984.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/8a7f431f-6109-4d56-81b9-e63d4f6e5984.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proyecto/BuscarPeliculas.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proyecto/ModificarGenero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/prueba/ModificarGenero.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proyecto/ModificarPelicula.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/prueba/ModificarPelicula.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proyecto/Principal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/proyecto/Principal.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,13 +36,14 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "last_opened_file_path": "C:/Users/jncni/Downloads/mongo-java-driver-3.2.2.jar",
     "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.0",
+    "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "reference.settings.ide.settings.file-colors"
   },
@@ -64,7 +59,7 @@
       <module name="ProyectoPeliculas" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="proyecto.*" />
+          <option name="PATTERN" value="prueba.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -88,8 +83,23 @@
       <updated>1669292164321</updated>
       <workItem from="1669292167134" duration="213000" />
       <workItem from="1669371271349" duration="311000" />
-      <workItem from="1669371734697" duration="12084000" />
+      <workItem from="1669371734697" duration="21566000" />
     </task>
+    <task id="LOCAL-00001" summary="CRUD v1">
+      <created>1669385444776</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1669385444776</updated>
+    </task>
+    <task id="LOCAL-00002" summary="CRUD v1">
+      <created>1669385458940</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1669385458940</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -105,5 +115,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="CRUD v1" />
+    <option name="LAST_COMMIT_MESSAGE" value="CRUD v1" />
   </component>
 </project>

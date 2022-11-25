@@ -1,4 +1,6 @@
-package proyecto;
+package prueba;
+
+import proyecto.Principal;
 
 import java.io.IOException;
 

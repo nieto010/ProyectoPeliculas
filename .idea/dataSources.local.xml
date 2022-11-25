@@ -11,6 +11,8 @@
           <node kind="schema">
             <name qname="test" />
             <name qname="peliculas" />
+            <name qname="amigos" />
+            <name qname="local" />
           </node>
         </introspection-scope>
       </schema-mapping>
