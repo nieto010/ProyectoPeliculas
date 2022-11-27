@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="31cb53df-75cb-4f75-8eda-5f91be4c5bd9" name="Changes" comment="CRUD v1">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+    <list default="true" id="31cb53df-75cb-4f75-8eda-5f91be4c5bd9" name="Changes" comment="CRUD v1.1">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/8a7f431f-6109-4d56-81b9-e63d4f6e5984.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/8a7f431f-6109-4d56-81b9-e63d4f6e5984.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/proyecto/BuscarPeliculas.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/proyecto/ModificarGenero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/prueba/ModificarGenero.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/proyecto/ModificarPelicula.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/prueba/ModificarPelicula.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/proyecto/Principal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/proyecto/Principal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/prueba/ModificarPelicula.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/prueba/ModificarPelicula.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,25 +31,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/jncni/Downloads/mongo-java-driver-3.2.2.jar",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settings.ide.settings.file-colors"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/jncni/Downloads/mongo-java-driver-3.2.2.jar&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.file-colors&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mongo"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mongo&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Principal" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="proyecto.Principal" />
@@ -83,7 +80,8 @@
       <updated>1669292164321</updated>
       <workItem from="1669292167134" duration="213000" />
       <workItem from="1669371271349" duration="311000" />
-      <workItem from="1669371734697" duration="21566000" />
+      <workItem from="1669371734697" duration="22511000" />
+      <workItem from="1669562952471" duration="8316000" />
     </task>
     <task id="LOCAL-00001" summary="CRUD v1">
       <created>1669385444776</created>
@@ -99,7 +97,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669385458940</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="CRUD v1.1">
+      <created>1669403501922</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1669403501922</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -118,6 +123,22 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="CRUD v1" />
-    <option name="LAST_COMMIT_MESSAGE" value="CRUD v1" />
+    <MESSAGE value="CRUD v1.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="CRUD v1.1" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/proyecto/Principal.java</url>
+          <line>238</line>
+          <properties class="proyecto.Principal" method="buscarPorGenero">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
