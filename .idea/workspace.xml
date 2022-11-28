@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="31cb53df-75cb-4f75-8eda-5f91be4c5bd9" name="Changes" comment="CRUD v1.4">
+    <list default="true" id="31cb53df-75cb-4f75-8eda-5f91be4c5bd9" name="Changes" comment="CRUD v1.5">
+      <change afterPath="$PROJECT_DIR$/src/proyecto/Insertar.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/proyecto/Insertar1.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proyecto/Comprobar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/proyecto/Comprobar.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/proyecto/Principal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/proyecto/Principal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/prueba/ModificarGenero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/prueba/ModificarGenero.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/prueba/ModificarPelicula.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/prueba/ModificarPelicula.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/prueba/ModificarGenero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/proyecto/ModificarGenero.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/prueba/ModificarPelicula.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/proyecto/ModificarPelicula.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +59,7 @@
       <module name="ProyectoPeliculas" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="prueba.*" />
+          <option name="PATTERN" value="proyecto.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -84,7 +87,7 @@
       <workItem from="1669562952471" duration="10054000" />
       <workItem from="1669624401901" duration="1534000" />
       <workItem from="1669635934136" duration="2355000" />
-      <workItem from="1669646925321" duration="4918000" />
+      <workItem from="1669646925321" duration="13383000" />
     </task>
     <task id="LOCAL-00001" summary="CRUD v1">
       <created>1669385444776</created>
@@ -135,7 +138,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669650371010</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="CRUD v1.5">
+      <created>1669651990529</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1669651990529</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -159,6 +169,7 @@
     <MESSAGE value="CRUD v1.3" />
     <MESSAGE value="CRUD v1.3.1" />
     <MESSAGE value="CRUD v1.4" />
-    <option name="LAST_COMMIT_MESSAGE" value="CRUD v1.4" />
+    <MESSAGE value="CRUD v1.5" />
+    <option name="LAST_COMMIT_MESSAGE" value="CRUD v1.5" />
   </component>
 </project>

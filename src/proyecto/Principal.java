@@ -5,8 +5,6 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.result.DeleteResult;
 import org.bson.Document;
-import prueba.ModificarGenero;
-import prueba.ModificarPelicula;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -57,7 +55,6 @@ public class Principal {
                     menuAdministrador();
                     break;
                 case 0:
-                    System.out.println("Fin del programa");
                     System.out.println(" ");
                     break;
                 default:
@@ -95,7 +92,6 @@ public class Principal {
                         menuCRUDGenero();
                     //menu crear
                     case 0:
-                        System.out.println("Fin del programa");
                         System.out.println(" ");
                         break;
                     default:
@@ -131,7 +127,7 @@ public class Principal {
                     listadoPeliculas();
                     break;
                 case 2:
-                    //crearPelicula();
+                    Insertar.insertarPelicula();
                     break;
                 case 3:
                     borrarPelicula();
@@ -140,7 +136,6 @@ public class Principal {
                     modificarPelicula();
                     break;
                 case 0:
-                    System.out.println("Fin del programa");
                     System.out.println(" ");
                     break;
                 default:
@@ -186,7 +181,6 @@ public class Principal {
                     modificarGenero();
                     break;
                 case 0:
-                    System.out.println("Fin del programa");
                     System.out.println(" ");
                     break;
                 default:
@@ -304,13 +298,19 @@ public class Principal {
         }
         try {
         System.out.println("Introduzca el nombre de la película que desee modificar");
+            System.out.println("Si desee salir introduzca SALIR");
         nombrePeliculaModificar = br.readLine();
+        if (nombrePeliculaModificar.equalsIgnoreCase("salir")) {
+            System.out.println("SALIENDO...");
+            System.out.println();
+        } else {
             if (!comprobarPeliculaExistente(nombrePeliculaModificar)) {
                 System.err.println("El nombre de la pelicula no existe");
                 modificarPelicula();
             } else {
                 menuModificarPelicula(nombrePeliculaModificar);
             }
+        }
        } catch (IOException ioe) {
            System.out.println("Error de E/S");
        }
@@ -364,7 +364,6 @@ public class Principal {
                     ModificarPelicula.modificarPublicoPelicula(nombrePelicula);
                     break;
                 case 0:
-                    System.out.println("Fin del programa");
                     System.out.println(" ");
                     break;
                 default:
@@ -378,12 +377,18 @@ public class Principal {
         String nombreGeneroModificar;
         try {
             System.out.println("Introduzca el nombre del género que desee modificar");
+            System.out.println("Si desee salir introduzca SALIR");
             nombreGeneroModificar = br.readLine();
-            if (!comprobarGeneroExistente(nombreGeneroModificar)) {
-                System.err.println("El nombre del genero no existe");
-                modificarGenero();
+            if (nombreGeneroModificar.equalsIgnoreCase("salir")) {
+                System.out.println("SALIENDO...");
+                System.out.println();
             } else {
-                menuModificarGenero(nombreGeneroModificar);
+                if (!comprobarGeneroExistente(nombreGeneroModificar)) {
+                    System.err.println("El nombre del genero no existe");
+                    modificarGenero();
+                } else {
+                    menuModificarGenero(nombreGeneroModificar);
+                }
             }
         } catch (IOException ioe) {
             System.out.println();
@@ -419,7 +424,6 @@ public class Principal {
                     ModificarGenero.modificarDescripcion(nombreGenero);
                     break;
                 case 0:
-                    System.out.println("Fin del programa");
                     System.out.println(" ");
                     break;
                 default:
@@ -468,47 +472,64 @@ public class Principal {
             Document pelicula = consultaPeliculas.get(i);
             System.out.println(i + 1 + ". " + pelicula.getString("nombre"));
         }
+        System.out.println("Introduzca SALIR si desee salir");
         try {
             System.out.println("Introduzca el nombre de la pelicula que desee borrar");
             nombrePelicula = br.readLine();
         } catch (IOException ioe) {
             System.err.println("Error de E/S");
         }
-        if (!comprobarPeliculaExistente(nombrePelicula)){
-            System.err.println("Esta pelicula no existe");
-            borrarPelicula();
+        if (nombrePelicula.equalsIgnoreCase("salir")) {
+            System.out.println("SALIENDO...");
+            System.out.println();
         } else {
-            for (int i = 0; i < consultaPeliculas.size(); i++) {
-                Document peliculas = consultaPeliculas.get(i);
-                if (peliculas.getString("nombre").equalsIgnoreCase(nombrePelicula)){
-                    DeleteResult delPelicula = coleccionGenero.deleteOne(eq("peliculas", peliculas.getString("_id")));
+            if (!comprobarPeliculaExistente(nombrePelicula)) {
+                System.err.println("Esta pelicula no existe");
+                borrarPelicula();
+            } else {
+                for (int i = 0; i < consultaPeliculas.size(); i++) {
+                    Document peliculas = consultaPeliculas.get(i);
+                    if (peliculas.getString("nombre").equalsIgnoreCase(nombrePelicula)) {
+                        DeleteResult delPelicula = coleccionGenero.deleteOne(eq("peliculas", peliculas.getString("_id")));
+                    }
                 }
+                DeleteResult del = coleccionPeliculas.deleteMany(eq("nombre", nombrePelicula));
+                System.out.println("Se ha borrado la pelicula");
             }
-            DeleteResult del = coleccionPeliculas.deleteMany(eq("nombre", nombrePelicula));
-            System.out.println("Se ha borrado la pelicula");
         }
     }
 
     public static void borrarGenero() {
         List<Document> consultaGenero = coleccionGenero.find().into(new ArrayList<>());
         String nombreGenero = null;
+        System.out.println("Listado de peliculas:");
+        for (int i = 0; i < consultaGenero.size(); i++) {
+            Document genero = consultaGenero.get(i);
+            System.out.println(i + 1 + ". " + genero.getString("nombre"));
+        }
+        System.out.println("Introduzca SALIR si desee salir");
         try {
             System.out.println("Introduzca el nombre del género que desee borrar");
             nombreGenero = br.readLine();
         } catch (IOException ioe) {
             System.err.println("Error de E/S");
         }
-        if (!comprobarGeneroExistente(nombreGenero)) {
-            System.err.println("Este genero no existe");
+        if (nombreGenero.equalsIgnoreCase("salir")) {
+            System.out.println("SALIENDO...");
+            System.out.println();
         } else {
-            for (int i = 0; i < consultaGenero.size(); i++) {
-                Document generos = consultaGenero.get(i);
-                if (generos.getString("nombre").equalsIgnoreCase(nombreGenero)){
-                    DeleteResult delID = coleccionPeliculas.deleteOne(eq("generos", generos.getString("_id")));
+            if (!comprobarGeneroExistente(nombreGenero)) {
+                System.err.println("Este genero no existe");
+            } else {
+                for (int i = 0; i < consultaGenero.size(); i++) {
+                    Document generos = consultaGenero.get(i);
+                    if (generos.getString("nombre").equalsIgnoreCase(nombreGenero)) {
+                        DeleteResult delID = coleccionPeliculas.deleteOne(eq("generos", generos.getString("_id")));
+                    }
                 }
+                DeleteResult del = coleccionGenero.deleteOne(eq("nombre", nombreGenero));
+                System.out.println("Se ha borrado el genero");
             }
-            DeleteResult del = coleccionGenero.deleteOne(eq("nombre", nombreGenero));
-            System.out.println("Se ha borrado el genero");
         }
     }
 
@@ -522,7 +543,9 @@ public class Principal {
     public static void listadoGeneros() {
         List<Document> consultaGenero = coleccionGenero.find().into(new ArrayList<>());
         for (int i = 0; i < consultaGenero.size(); i++) {
-            System.out.println(i + 1 +".- " + consultaGenero.get(i).toString());
+            Document genero = consultaGenero.get(i);
+            System.out.println("Nombre: " + genero.getString("nombre") + "\nDescripcion: " + genero.get("descripcion") + "\nPeliculas: "
+                    + genero.get("peliculas"));
         }
     }
 }

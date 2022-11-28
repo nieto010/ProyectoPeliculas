@@ -1,5 +1,11 @@
 package proyecto;
 
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
+
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,24 +16,17 @@ public class Comprobar {
         Pattern pat = Pattern.compile("[^ + - * / = % & # ! ? ^  “ ‘ ~ \\ | < > ( ) [ ] { } : ; . , $ · € ~ ¬ { } € ]");
         Matcher m = pat.matcher(nombre);
         if(m.matches()){
-            comprobado = true;
-        }else{
             comprobado = false;
+        }else{
+            comprobado = true;
         }
         return comprobado;
     }
 
-    public static boolean validarFechaPelicula(String fecha) {
-        final String fechaREGEX =
-                "^(?:(?:(?:0?[13578]|1[02])(\\/|-|\\.)31)\\1|" +
-                        "(?:(?:0?[1,3-9]|1[0-2])(\\/|-|\\.)(?:29|30)\\2))" +
-                        "(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:0?2(\\/|-|\\.)29\\3" +
-                        "(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|" +
-                        "[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|" +
-                        "^(?:(?:0?[1-9])|(?:1[0-2]))(\\/|-|\\.)(?:0?[1-9]|1\\d|" +
-                        "2[0-8])\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$";
+    public static boolean comprobarFechaPelicula(String fecha) {
+        final String regex = "^([0-2][0-9]|3[0-1])(\\/|-)(0[1-9]|1[0-2])\\2(\\d{4})$";
 
-        final Pattern fechaPATTERN = Pattern.compile(fechaREGEX);
+        final Pattern fechaPATTERN = Pattern.compile(regex);
         Matcher matcher = fechaPATTERN.matcher(fecha);
         return matcher.matches();
     }
@@ -56,31 +55,69 @@ public class Comprobar {
         }
     }
 
-    public static boolean comprobarMayorDeEdadPelicula(int numero) {
-        if (numero >= 18) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public static boolean comprobarNombreGenero(String nombreGenero) {
-        if (nombreGenero.matches("[a-zA-Z]")) {
-            return true;
-        } else {
-            return false;
-        }
+        return nombreGenero.matches("[a-zA-Z]");
     }
 
     public static boolean comprobarDescripcionGenero(String descripcionGenero) {
-        if (descripcionGenero.matches("a-zA-Z_0-9")) {
-            return true;
-        } else {
-            return false;
-        }
+        return descripcionGenero.matches("a-zA-Z_0-9");
     }
 
     public static boolean comprobarNumeroMenu(String opcionMenu) {
         return opcionMenu.matches("[0-9]");
+    }
+
+    public static boolean comprobarNumeroDouble(String numero){
+        return numero.matches("[0-9].[0-9]") || numero.matches("[0-9]");
+    }
+
+    public static boolean comprobarBoolean(String booleano) {
+        return booleano.equalsIgnoreCase("true") || booleano.equalsIgnoreCase("false");
+    }
+
+    public static boolean comprobarPeliculaExistente(String nombrePelicula) {
+        int i = 0;
+        boolean encontrado = false;
+        MongoClient cliente = new MongoClient();
+        MongoDatabase db = cliente.getDatabase("test");
+        MongoCollection<Document> coleccion = db.getCollection("peliculas");
+        ArrayList<Document> consultaPeliculas = coleccion.find().into(new ArrayList<Document>());
+        while (i < consultaPeliculas.size() && !encontrado) {
+            Document pelicula = consultaPeliculas.get(i);
+            if (nombrePelicula.equalsIgnoreCase(pelicula.getString("nombre"))){
+                System.out.println("encontrado");
+                encontrado = true;
+            } else {
+                i++;
+            }
+        }
+        return encontrado;
+    }
+
+    public static boolean comprobarGeneroExistente(String nombreGenero) {
+        int i = 0;
+        boolean encontrado = false;
+        MongoClient cliente = new MongoClient();
+        MongoDatabase db = cliente.getDatabase("test");
+        MongoCollection<Document> coleccion = db.getCollection("generos");
+        ArrayList<Document> consultaPeliculas = coleccion.find().into(new ArrayList<Document>());
+        while (i < consultaPeliculas.size() && !encontrado) {
+            Document genero = consultaPeliculas.get(i);
+            if (nombreGenero.equalsIgnoreCase(genero.getString("nombre"))){
+                System.out.println("encontrado");
+                encontrado = true;
+            } else {
+                i++;
+            }
+        }
+        return encontrado;
+    }
+
+    public static boolean comprobarSeguirString(String seguir) {
+        return seguir.matches("[YNyn]");
+    }
+
+    public static boolean comprobarDuracionPelicula(String duracion) {
+        return duracion.matches("[0-9]") || duracion.matches("[0-9][0-9]") || duracion.matches("[0-9][0-9][0-9]");
     }
 }

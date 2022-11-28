@@ -1,5 +1,6 @@
-package prueba;
+package proyecto;
 
+import proyecto.Comprobar;
 import proyecto.Principal;
 
 import java.io.IOException;
@@ -19,7 +20,12 @@ public class ModificarGenero {
         } catch (IOException ioe) {
             System.out.println("Error");
         }
-        Principal.coleccionGenero.updateMany(eq("nombre", nombreGeneroModificar), set("nombre", nombreGenero));
+        if (Comprobar.comprobarNombreGenero(nombreGenero)) {
+            Principal.coleccionGenero.updateMany(eq("nombre", nombreGeneroModificar), set("nombre", nombreGenero));
+        } else {
+            System.out.println("Nombre no valido para el genero");
+        }
+
     }
 
     public static void modificarDescripcion(String nombreGeneroModificar) {
