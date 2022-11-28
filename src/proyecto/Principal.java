@@ -22,8 +22,6 @@ public class Principal {
     static MongoDatabase db = cliente.getDatabase("peliculas");
     public static MongoCollection<Document> coleccionPeliculas = db.getCollection("peliculas");
     public static MongoCollection<Document> coleccionGenero = db.getCollection("generos");
-    static List<Document> consultaPeliculas = coleccionPeliculas.find().into(new ArrayList<>());
-    static List<Document> consultaGenero = coleccionGenero.find().into(new ArrayList<>());
     public static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     public static void main(String[] args) throws IOException {
@@ -236,6 +234,7 @@ public class Principal {
     }
 
     private static int buscarPorNombre() throws IOException {
+        List<Document> consultaPeliculas = coleccionPeliculas.find().into(new ArrayList<>());
         int i = 0;
         boolean buscar = false;
         try {
@@ -267,6 +266,7 @@ public class Principal {
 
     // TERMINAR
     private static int buscarPorGenero() throws IOException {
+        List<Document> consultaGenero = coleccionGenero.find().into(new ArrayList<>());
         int i = 0;
         boolean buscar = false;
         try {
@@ -295,7 +295,13 @@ public class Principal {
 
 
     public static void modificarPelicula() {
-       String nombrePeliculaModificar;
+        List<Document> consultaPeliculas = coleccionPeliculas.find().into(new ArrayList<>());
+        String nombrePeliculaModificar;
+        System.out.println("Listado de peliculas:");
+        for (int i = 0; i < consultaPeliculas.size(); i++) {
+            Document pelicula = consultaPeliculas.get(i);
+            System.out.println(i + 1 + ". " + pelicula.getString("nombre"));
+        }
         try {
         System.out.println("Introduzca el nombre de la película que desee modificar");
         nombrePeliculaModificar = br.readLine();
@@ -425,6 +431,7 @@ public class Principal {
     }
 
     public static boolean comprobarPeliculaExistente(String nombrePelicula) {
+        List<Document> consultaPeliculas = coleccionPeliculas.find().into(new ArrayList<>());
         int i = 0;
         boolean encontrado = false;
         while (i < consultaPeliculas.size() && !encontrado) {
@@ -439,6 +446,7 @@ public class Principal {
     }
 
     public static boolean comprobarGeneroExistente(String nombreGenero) {
+        List<Document> consultaGenero = coleccionGenero.find().into(new ArrayList<>());
         int i = 0;
         boolean encontrado = false;
         while (i < consultaGenero.size() && !encontrado) {
@@ -453,7 +461,13 @@ public class Principal {
     }
 
     public static void borrarPelicula() {
+        List<Document> consultaPeliculas = coleccionPeliculas.find().into(new ArrayList<>());
         String nombrePelicula = null;
+        System.out.println("Listado de peliculas:");
+        for (int i = 0; i < consultaPeliculas.size(); i++) {
+            Document pelicula = consultaPeliculas.get(i);
+            System.out.println(i + 1 + ". " + pelicula.getString("nombre"));
+        }
         try {
             System.out.println("Introduzca el nombre de la pelicula que desee borrar");
             nombrePelicula = br.readLine();
@@ -470,12 +484,13 @@ public class Principal {
                     DeleteResult delPelicula = coleccionGenero.deleteOne(eq("peliculas", peliculas.getString("_id")));
                 }
             }
-            DeleteResult del = coleccionPeliculas.deleteOne(eq("nombre", nombrePelicula));
+            DeleteResult del = coleccionPeliculas.deleteMany(eq("nombre", nombrePelicula));
             System.out.println("Se ha borrado la pelicula");
         }
     }
 
     public static void borrarGenero() {
+        List<Document> consultaGenero = coleccionGenero.find().into(new ArrayList<>());
         String nombreGenero = null;
         try {
             System.out.println("Introduzca el nombre del género que desee borrar");
@@ -498,12 +513,14 @@ public class Principal {
     }
 
     public static void listadoPeliculas() {
+        List<Document> consultaPeliculas = coleccionPeliculas.find().into(new ArrayList<>());
         for (int i = 0; i < consultaPeliculas.size(); i++) {
             System.out.println(i + 1 +".- " + consultaPeliculas.get(i).toString());
         }
     }
 
     public static void listadoGeneros() {
+        List<Document> consultaGenero = coleccionGenero.find().into(new ArrayList<>());
         for (int i = 0; i < consultaGenero.size(); i++) {
             System.out.println(i + 1 +".- " + consultaGenero.get(i).toString());
         }

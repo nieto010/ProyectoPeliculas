@@ -20,7 +20,7 @@ public class ModificarPelicula {
         } catch (IOException ioe) {
             System.out.println("Error");
         }
-       // p.coleccionPeliculas.updateOne(eq("nombre", nombrePeliculaModificar), set("nombre", nombrePelicula));
+       coleccionPeliculas.updateMany(eq("nombre", nombrePeliculaModificar), set("nombre", nombrePelicula));
     }
 
     public static void modificarDirectorPelicula(String nombrePeliculaModificar) {
@@ -31,7 +31,7 @@ public class ModificarPelicula {
         } catch (IOException ioe) {
             System.out.println("Error");
         }
-        //p.coleccionPeliculas.updateOne(eq("nombre", nombrePeliculaModificar), set("director", nombreDirector));
+        coleccionPeliculas.updateMany(eq("nombre", nombrePeliculaModificar), set("director", nombreDirector));
     }
 
     public static void modificarSipnosisPelicula(String nombrePeliculaModificar) {
@@ -42,7 +42,7 @@ public class ModificarPelicula {
         } catch (IOException ioe) {
             System.out.println("Error");
         }
-        //p.coleccionPeliculas.updateOne(eq("nombre", nombrePeliculaModificar), set("sipnosis", sipnosis));
+        coleccionPeliculas.updateMany(eq("nombre", nombrePeliculaModificar), set("sipnosis", sipnosis));
     }
 
     public static void modificarDuracionPelicula(String nombrePeliculaModificar) {
@@ -53,7 +53,7 @@ public class ModificarPelicula {
         } catch (IOException ioe) {
             System.out.println("Error");
         }
-        coleccionPeliculas.updateOne(eq("nombre", nombrePeliculaModificar), set("duracion", duracion));
+        coleccionPeliculas.updateMany(eq("nombre", nombrePeliculaModificar), set("duracion", duracion));
     }
 
     public static void modificarValoracionPelicula(String nombrePeliculaModificar) {
@@ -64,7 +64,7 @@ public class ModificarPelicula {
         } catch (IOException ioe) {
             System.out.println("Error");
         }
-        coleccionPeliculas.updateOne(eq("nombre", nombrePeliculaModificar), set("valoracion", valoracion));
+        coleccionPeliculas.updateMany(eq("nombre", nombrePeliculaModificar), set("valoracion", valoracion));
     }
 
     public static void modificarFechaEstrenoPelicula(String nombrePeliculaModificar) {
@@ -75,7 +75,7 @@ public class ModificarPelicula {
         } catch (IOException ioe) {
             System.out.println("Error");
         }
-        coleccionPeliculas.updateOne(eq("nombre", nombrePeliculaModificar), set("fecha", fechaPelicula));
+        coleccionPeliculas.updateMany(eq("nombre", nombrePeliculaModificar), set("fecha", fechaPelicula));
     }
 
     public static void modificarPublicoPelicula(String nombrePeliculaModificar) {
@@ -86,7 +86,7 @@ public class ModificarPelicula {
         } catch (IOException ioe) {
             System.out.println("Error");
         }
-        coleccionPeliculas.updateOne(eq("nombre", nombrePeliculaModificar), set("publico", mayorDeEdad));
+        coleccionPeliculas.updateMany(eq("nombre", nombrePeliculaModificar), set("publico", mayorDeEdad));
     }
 
 
