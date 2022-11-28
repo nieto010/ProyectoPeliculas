@@ -28,7 +28,8 @@ public class Principal {
     }
 
     private static void menu() throws NumberFormatException, IOException {
-        int opcion = 0;
+        String opcion = null;
+        int opcionValida = 100;
         do {
             System.out.println("-MENU PRINCIPAL-");
             System.out.println("1. Menu Usuario");
@@ -36,11 +37,16 @@ public class Principal {
             System.out.println("0. Salir");
             try {
                 System.out.println("Seleccione una opcion: ");
-                opcion = Integer.parseInt(br.readLine());
+                opcion = br.readLine();
+                if (Comprobar.comprobarNumeroMenu(opcion)) {
+                    opcionValida = Integer.parseInt(opcion);
+                } else {
+                    System.out.println("Introduzca un numero, por favor");
+                }
             } catch (InputMismatchException ime) {
-                opcion = 100;
+                opcionValida = 100;
             }
-            switch (opcion) {
+            switch (opcionValida) {
                 case 1:
                     //Menu
                     menuUsuario();
@@ -57,12 +63,13 @@ public class Principal {
                     System.out.println("Introduzca un numero del 0 al 2");
                     break;
             }
-        } while (opcion != 0);
+        } while (opcionValida != 0);
 
     }
 
     private static void menuAdministrador() throws NumberFormatException, IOException {
-        int opcion = 0;
+        String opcion = null;
+        int opcionValida = 100;
         do {
             System.out.println("-MENU ADMINISTRADOR-");
             System.out.println("1. Menu del CRUD de películas");
@@ -70,33 +77,38 @@ public class Principal {
             System.out.println("0. Salir");
             try {
                 System.out.println("Seleccione una opcion: ");
-                opcion = Integer.parseInt(br.readLine());
+                opcion = br.readLine();
+                if (Comprobar.comprobarNumeroMenu(opcion)) {
+                    opcionValida = Integer.parseInt(opcion);
+                } else {
+                    System.out.println("Introduzca un numero, por favor");
+                }
             } catch (InputMismatchException ime) {
-                opcion = 100;
+                opcionValida = 100;
+                switch (opcionValida) {
+                    case 1:
+                        //leer los documentos de la coleccion
+                        menuCRUDGenero();
+                        break;
+                    case 2:
+                        //menu crear
+                        menuCRUDPelicula();
+                        break;
+                    case 0:
+                        System.out.println("Fin del programa");
+                        System.out.println(" ");
+                        break;
+                    default:
+                        System.out.println("Introduzca un numero del 0 al 2");
+                        break;
+                }
             }
-            switch (opcion) {
-                case 1:
-                    //leer los documentos de la coleccion
-                    menuCRUDGenero();
-                    break;
-                case 2:
-                    //menu crear
-                    menuCRUDPelicula();
-                    break;
-                case 0:
-                    System.out.println("Fin del programa");
-                    System.out.println(" ");
-                    break;
-                default:
-                    System.out.println("Introduzca un numero del 0 al 2");
-                    break;
-            }
-        } while (opcion != 0);
-
+        } while (opcionValida != 0) ;
     }
 
     private static void menuCRUDPelicula() throws NumberFormatException, IOException {
-        int opcion = 0;
+        String opcion = null;
+        int opcionValida = 100;
         do {
             System.out.println("-MENU PELICULAS (CRUD)-");
             System.out.println("1. Consultar películas");
@@ -106,11 +118,16 @@ public class Principal {
             System.out.println("0. Salir");
             try {
                 System.out.println("Seleccione una opcion: ");
-                opcion = Integer.parseInt(br.readLine());
+                opcion = br.readLine();
+                if (Comprobar.comprobarNumeroMenu(opcion)) {
+                    opcionValida = Integer.parseInt(opcion);
+                } else {
+                    System.out.println("Introduzca un numero por favor");
+                }
             } catch (InputMismatchException ime) {
-                opcion = 100;
+                opcionValida = 100;
             }
-            switch (opcion) {
+            switch (opcionValida) {
                 case 1:
                     //ConsultarPeliculas();
                     break;
@@ -131,12 +148,13 @@ public class Principal {
                     System.out.println("Introduzca un numero del 0 al 4");
                     break;
             }
-        } while (opcion != 0);
+        } while (opcionValida != 0);
 
     }
 
     private static void menuCRUDGenero() throws NumberFormatException, IOException {
-        int opcion = 0;
+        String opcion = null;
+        int opcionValida = 100;
         do {
             System.out.println("-MENU PELICULAS (CRUD)-");
             System.out.println("1. Consultar géneros");
@@ -146,11 +164,16 @@ public class Principal {
             System.out.println("0. Salir");
             try {
                 System.out.println("Seleccione una opcion: ");
-                opcion = Integer.parseInt(br.readLine());
+                opcion = br.readLine();
+                if (Comprobar.comprobarNumeroMenu(opcion)) {
+                    opcionValida = Integer.parseInt(opcion);
+                } else {
+                    System.out.println("Introduzca un numero por favor");
+                }
             } catch (InputMismatchException ime) {
-                opcion = 100;
+                opcionValida = 100;
             }
-            switch (opcion) {
+            switch (opcionValida) {
                 case 1:
                     //ConsultarGéneros();
                     break;
@@ -171,12 +194,13 @@ public class Principal {
                     System.out.println("Introduzca un numero del 0 al 4");
                     break;
             }
-        } while (opcion != 0);
+        } while (opcionValida != 0);
 
     }
 
     private static void menuUsuario() throws NumberFormatException, IOException {
-        int opcion = 0;
+        int opcionValida = 0;
+        String opcion = null;
         do {
             System.out.println("-MENU USUARIO-");
             System.out.println("1. Buscar película por nombre");
@@ -184,11 +208,16 @@ public class Principal {
             System.out.println("0. Salir");
             try {
                 System.out.println("Seleccione una opcion: ");
-                opcion = Integer.parseInt(br.readLine());
+                opcion = br.readLine();
+                if (Comprobar.comprobarNumeroMenu(opcion)){
+                    opcionValida = Integer.parseInt(opcion);
+                } else {
+                    System.out.println("Introduzca un numero por favor");
+                }
             } catch (InputMismatchException ime) {
-                opcion = 100;
+                opcionValida = 100;
             }
-            switch (opcion) {
+            switch (opcionValida) {
                 case 1:
                     buscarPorNombre();
                     break;
@@ -202,7 +231,7 @@ public class Principal {
                     System.out.println("Introduce un numero del 0 al 2");
                     break;
             }
-        } while (opcion != 0);
+        } while (opcionValida != 0);
     }
 
     private static int buscarPorNombre() throws IOException {

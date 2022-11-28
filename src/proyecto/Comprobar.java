@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class Comprobar {
 
-    public boolean comprobarNombrePelicula(String nombre) {
+    public static boolean comprobarNombrePelicula(String nombre) {
         boolean comprobado = false;
         Pattern pat = Pattern.compile("[^ + - * / = % & # ! ? ^  “ ‘ ~ \\ | < > ( ) [ ] { } : ; . , $ · € ~ ¬ { } € ]");
         Matcher m = pat.matcher(nombre);
@@ -17,7 +17,7 @@ public class Comprobar {
         return comprobado;
     }
 
-    public boolean validarFechaPelicula(String fecha) {
+    public static boolean validarFechaPelicula(String fecha) {
         final String fechaREGEX =
                 "^(?:(?:(?:0?[13578]|1[02])(\\/|-|\\.)31)\\1|" +
                         "(?:(?:0?[1,3-9]|1[0-2])(\\/|-|\\.)(?:29|30)\\2))" +
@@ -32,7 +32,7 @@ public class Comprobar {
         return matcher.matches();
     }
 
-    public boolean comprobarNombreDirectorPelicula(String nombreDirector) {
+    public static boolean comprobarNombreDirectorPelicula(String nombreDirector) {
         if (nombreDirector.matches("[a-zA-Z]")){
             return true;
         } else {
@@ -40,7 +40,7 @@ public class Comprobar {
         }
     }
 
-    public boolean comprobarDuracionPelicula(int duracion) {
+    public static boolean comprobarDuracionPelicula(int duracion) {
         if (duracion > 30) {
             return true;
         } else {
@@ -48,7 +48,7 @@ public class Comprobar {
         }
     }
 
-    public boolean comprobarValoracionPelicula(double valoracion) {
+    public static boolean comprobarValoracionPelicula(double valoracion) {
         if (valoracion < 5 && valoracion > 0) {
             return true;
         } else {
@@ -56,7 +56,7 @@ public class Comprobar {
         }
     }
 
-    public boolean comprobarMayorDeEdadPelicula(int numero) {
+    public static boolean comprobarMayorDeEdadPelicula(int numero) {
         if (numero >= 18) {
             return true;
         } else {
@@ -64,7 +64,7 @@ public class Comprobar {
         }
     }
 
-    public boolean comprobarNombreGenero(String nombreGenero) {
+    public static boolean comprobarNombreGenero(String nombreGenero) {
         if (nombreGenero.matches("[a-zA-Z]")) {
             return true;
         } else {
@@ -72,11 +72,15 @@ public class Comprobar {
         }
     }
 
-    public boolean comprobarDescripcionGenero(String descripcionGenero) {
+    public static boolean comprobarDescripcionGenero(String descripcionGenero) {
         if (descripcionGenero.matches("a-zA-Z_0-9")) {
             return true;
         } else {
             return false;
         }
+    }
+
+    public static boolean comprobarNumeroMenu(String opcionMenu) {
+        return opcionMenu.matches("[0-9]");
     }
 }
