@@ -69,7 +69,7 @@ public class Principal {
 
     private static void menuAdministrador() throws NumberFormatException, IOException {
         String opcion = null;
-        int opcionValida = 100;
+        int opcionValida = 5;
         do {
             System.out.println("-MENU ADMINISTRADOR-");
             System.out.println("1. Menu del CRUD de películas");
@@ -85,15 +85,14 @@ public class Principal {
                 }
             } catch (InputMismatchException ime) {
                 opcionValida = 100;
+            }
                 switch (opcionValida) {
                     case 1:
-                        //leer los documentos de la coleccion
-                        menuCRUDGenero();
-                        break;
-                    case 2:
-                        //menu crear
                         menuCRUDPelicula();
                         break;
+                    case 2:
+                        menuCRUDGenero();
+                    //menu crear
                     case 0:
                         System.out.println("Fin del programa");
                         System.out.println(" ");
@@ -102,19 +101,18 @@ public class Principal {
                         System.out.println("Introduzca un numero del 0 al 2");
                         break;
                 }
-            }
         } while (opcionValida != 0) ;
     }
 
     private static void menuCRUDPelicula() throws NumberFormatException, IOException {
-        String opcion = null;
+        String opcion;
         int opcionValida = 100;
         do {
             System.out.println("-MENU PELICULAS (CRUD)-");
-            System.out.println("1. Consultar películas");
-            System.out.println("2. Metodo crear películas");
-            System.out.println("3. Metodo borrar películas");
-            System.out.println("4. Metodo modificar películas");
+            System.out.println("1. Consultar peliculas");
+            System.out.println("2. Agregar pelicula");
+            System.out.println("3. Borrar pelicula");
+            System.out.println("4. Modificar pelicula");
             System.out.println("0. Salir");
             try {
                 System.out.println("Seleccione una opcion: ");
@@ -319,11 +317,6 @@ public class Principal {
         } catch (IOException ioe) {
             System.out.println();
         }
-    }
-
-    public static void formatoFecha(String fecha) {
-        String.format(fecha, "--/--/----");
-
     }
 
     public static boolean comprobarPeliculaExistente(String nombrePelicula) {
