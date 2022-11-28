@@ -6,29 +6,30 @@ import java.io.IOException;
 
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Updates.set;
+import static proyecto.Principal.br;
 
 public class ModificarGenero {
-    Principal p = new Principal();
 
-    public void modificarNombreGenero(String nombreGeneroModificar) {
+
+    public static void modificarNombreGenero(String nombreGeneroModificar) {
         String nombreGenero = null;
         try {
             System.out.println("Introduzca el nombre que desee poner a la pelicula");
-            nombreGenero = p.br.readLine();
+            nombreGenero = br.readLine();
         } catch (IOException ioe) {
             System.out.println("Error");
         }
-        p.coleccionGenero.updateOne(eq("nombre", nombreGeneroModificar), set("nombre", nombreGenero));
+        Principal.coleccionGenero.updateOne(eq("nombre", nombreGeneroModificar), set("nombre", nombreGenero));
     }
 
-    public void modificarDescripcion(String nombreGeneroModificar) {
+    public static void modificarDescripcion(String nombreGeneroModificar) {
         String descripcionGenero = null;
         try {
             System.out.println("Introduzca el nombre que desee poner a la pelicula");
-            descripcionGenero = p.br.readLine();
+            descripcionGenero = br.readLine();
         } catch (IOException ioe) {
             System.out.println("Error");
         }
-        p.coleccionGenero.updateOne(eq("nombre", nombreGeneroModificar), set("descripcion", descripcionGenero));
+        Principal.coleccionGenero.updateOne(eq("nombre", nombreGeneroModificar), set("descripcion", descripcionGenero));
     }
 }

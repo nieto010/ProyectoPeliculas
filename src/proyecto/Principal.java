@@ -5,6 +5,9 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.result.DeleteResult;
 import org.bson.Document;
+import prueba.ModificarGenero;
+import prueba.ModificarPelicula;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -17,7 +20,7 @@ import static com.mongodb.client.model.Filters.eq;
 public class Principal {
     static MongoClient cliente = new MongoClient();
     static MongoDatabase db = cliente.getDatabase("peliculas");
-    static MongoCollection<Document> coleccionPeliculas = db.getCollection("peliculas");
+    public static MongoCollection<Document> coleccionPeliculas = db.getCollection("peliculas");
     public static MongoCollection<Document> coleccionGenero = db.getCollection("generos");
     static List<Document> consultaPeliculas = coleccionPeliculas.find().into(new ArrayList<>());
     static List<Document> consultaGenero = coleccionGenero.find().into(new ArrayList<>());
@@ -127,10 +130,10 @@ public class Principal {
             }
             switch (opcionValida) {
                 case 1:
-                    //ConsultarPeliculas();
+                    listadoPeliculas();
                     break;
                 case 2:
-                    //CrearPeliculas();
+                    //crearPelicula();
                     break;
                 case 3:
                     borrarPelicula();
@@ -173,10 +176,10 @@ public class Principal {
             }
             switch (opcionValida) {
                 case 1:
-                    //ConsultarGéneros();
+                    listadoGeneros();
                     break;
                 case 2:
-                    //CrearGéneros();
+                    //crearGeneros();
                     break;
                 case 3:
                     borrarGenero();
@@ -244,6 +247,7 @@ public class Principal {
                 while (i < consultaPeliculas.size() && !buscar) {
                     Document pel = consultaPeliculas.get(i);
                     if (nombreP.equalsIgnoreCase(pel.getString("nombre"))) {
+
                         System.out.println("Nombre: " + pel.getString("nombre") + "\nSipnosis: " + pel.get("sinopsis") + "\nFecha de estreno: "
                                 + pel.get("fecha") + "\nDirector: " + pel.get("director") + "\nMayor de 18 anios: " + pel.get("publico") + "\nValoracion:"
                                 + pel.get("valoracion") + "\nDuracion: " + pel.get("duracion") + "\nGeneros: " + pel.get("genero"));
@@ -298,11 +302,70 @@ public class Principal {
             if (!comprobarPeliculaExistente(nombrePeliculaModificar)) {
                 System.err.println("El nombre de la pelicula no existe");
                 modificarPelicula();
+            } else {
+                menuModificarPelicula(nombrePeliculaModificar);
             }
        } catch (IOException ioe) {
            System.out.println("Error de E/S");
        }
 
+    }
+
+    private static void menuModificarPelicula(String nombrePelicula) throws NumberFormatException, IOException {
+        String opcion = null;
+        int opcionValida = 100;
+        do {
+            System.out.println("-MENU MODIFICAR PELICULA-");
+            System.out.println("1. Modificar el nombre de la pelicula");
+            System.out.println("2. Modificar la sipnosis de la pelicula");
+            System.out.println("3. Modificar el director de la pelicula");
+            System.out.println("4. Modificar la duracion de la pelicula");
+            System.out.println("5. Modificar la valoracion de la pelicula");
+            System.out.println("6. Modificar fecha de estreno de la pelicula");
+            System.out.println("7. Modificar si la pelicula es para mayor de 18 anios");
+            System.out.println("0. Salir");
+            try {
+                System.out.println("Seleccione una opcion: ");
+                opcion = br.readLine();
+                if (Comprobar.comprobarNumeroMenu(opcion)) {
+                    opcionValida = Integer.parseInt(opcion);
+                } else {
+                    System.out.println("Introduzca un numero, por favor");
+                }
+            } catch (InputMismatchException ime) {
+                opcionValida = 100;
+            }
+            switch (opcionValida) {
+                case 1:
+                    ModificarPelicula.modificarNombrePelicula(nombrePelicula);
+                    break;
+                case 2:
+                    ModificarPelicula.modificarSipnosisPelicula(nombrePelicula);
+                    break;
+                case 3:
+                    ModificarPelicula.modificarDirectorPelicula(nombrePelicula);
+                    break;
+                case 4:
+                    ModificarPelicula.modificarDuracionPelicula(nombrePelicula);
+                    break;
+                case 5:
+                    ModificarPelicula.modificarValoracionPelicula(nombrePelicula);
+                    break;
+                case 6:
+                    ModificarPelicula.modificarFechaEstrenoPelicula(nombrePelicula);
+                    break;
+                case 7:
+                    ModificarPelicula.modificarPublicoPelicula(nombrePelicula);
+                    break;
+                case 0:
+                    System.out.println("Fin del programa");
+                    System.out.println(" ");
+                    break;
+                default:
+                    System.out.println("Introduzca un numero del 0 al 2");
+                    break;
+            }
+        } while (opcionValida != 0) ;
     }
 
     public static void modificarGenero() {
@@ -313,10 +376,52 @@ public class Principal {
             if (!comprobarGeneroExistente(nombreGeneroModificar)) {
                 System.err.println("El nombre del genero no existe");
                 modificarGenero();
+            } else {
+                menuModificarGenero(nombreGeneroModificar);
             }
         } catch (IOException ioe) {
             System.out.println();
         }
+    }
+
+    private static void menuModificarGenero(String nombreGenero) throws NumberFormatException, IOException {
+        String opcion = null;
+        int opcionValida = 100;
+        do {
+            System.out.println("-MENU MODIFICAR GENERO-");
+            System.out.println("1. Modificar el nombre de el genero");
+            System.out.println("2. Modificar la descripcion de el genero");
+            System.out.println("0. Salir");
+            try {
+                System.out.println("Seleccione una opcion: ");
+                opcion = br.readLine();
+                if (Comprobar.comprobarNumeroMenu(opcion)) {
+                    opcionValida = Integer.parseInt(opcion);
+                } else {
+                    System.out.println("Introduzca un numero, por favor");
+                }
+            } catch (InputMismatchException ime) {
+                opcionValida = 100;
+            }
+            switch (opcionValida) {
+                case 1:
+                    //Menu
+                    ModificarGenero.modificarNombreGenero(nombreGenero);
+                    break;
+                case 2:
+                    //Menu administrador con todos los metodos del CRUD.
+                    ModificarGenero.modificarDescripcion(nombreGenero);
+                    break;
+                case 0:
+                    System.out.println("Fin del programa");
+                    System.out.println(" ");
+                    break;
+                default:
+                    System.out.println("Introduzca un numero del 0 al 2");
+                    break;
+            }
+        } while (opcionValida != 0);
+
     }
 
     public static boolean comprobarPeliculaExistente(String nombrePelicula) {
@@ -389,6 +494,18 @@ public class Principal {
             }
             DeleteResult del = coleccionGenero.deleteOne(eq("nombre", nombreGenero));
             System.out.println("Se ha borrado el genero");
+        }
+    }
+
+    public static void listadoPeliculas() {
+        for (int i = 0; i < consultaPeliculas.size(); i++) {
+            System.out.println(i + 1 +".- " + consultaPeliculas.get(i).toString());
+        }
+    }
+
+    public static void listadoGeneros() {
+        for (int i = 0; i < consultaGenero.size(); i++) {
+            System.out.println(i + 1 +".- " + consultaGenero.get(i).toString());
         }
     }
 }

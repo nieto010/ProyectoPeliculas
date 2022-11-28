@@ -5,86 +5,88 @@ import proyecto.Principal;
 import java.io.IOException;
 import static com.mongodb.client.model.Filters.*;
 import static com.mongodb.client.model.Updates.*;
+import static proyecto.Principal.br;
+import static proyecto.Principal.coleccionPeliculas;
 
 
 public class ModificarPelicula {
     Principal p = new Principal();
 
-    public void modificarNombrePelicula(String nombrePeliculaModificar) {
+    public static void modificarNombrePelicula(String nombrePeliculaModificar) {
         String nombrePelicula = null;
         try {
             System.out.println("Introduzca el nombre que desee poner a la pelicula");
-            nombrePelicula = p.br.readLine();
+            nombrePelicula = br.readLine();
         } catch (IOException ioe) {
             System.out.println("Error");
         }
        // p.coleccionPeliculas.updateOne(eq("nombre", nombrePeliculaModificar), set("nombre", nombrePelicula));
     }
 
-    public void modificarDirectorPelicula(String nombrePeliculaModificar) {
+    public static void modificarDirectorPelicula(String nombrePeliculaModificar) {
         String nombreDirector = null;
         try {
             System.out.println("Introduzca el nombre del director que realizo la pelicula");
-            nombreDirector = p.br.readLine();
+            nombreDirector = br.readLine();
         } catch (IOException ioe) {
             System.out.println("Error");
         }
         //p.coleccionPeliculas.updateOne(eq("nombre", nombrePeliculaModificar), set("director", nombreDirector));
     }
 
-    public void modificarSipnosisPelicula(String nombrePeliculaModificar) {
+    public static void modificarSipnosisPelicula(String nombrePeliculaModificar) {
         String sipnosis = null;
         try {
             System.out.println("Introduzca la sipnosis de la pelicula");
-            sipnosis = p.br.readLine();
+            sipnosis = br.readLine();
         } catch (IOException ioe) {
             System.out.println("Error");
         }
         //p.coleccionPeliculas.updateOne(eq("nombre", nombrePeliculaModificar), set("sipnosis", sipnosis));
     }
 
-    public void modificarDuracionPelicula(String nombrePeliculaModificar) {
+    public static void modificarDuracionPelicula(String nombrePeliculaModificar) {
         int duracion = 0;
         try {
             System.out.println("Introduzca la duracion de la pelicula");
-            duracion = Integer.parseInt(p.br.readLine());
+            duracion = Integer.parseInt(br.readLine());
         } catch (IOException ioe) {
             System.out.println("Error");
         }
-        //p.coleccionPeliculas.updateOne(eq("nombre", nombrePeliculaModificar), set("duracion", duracion));
+        coleccionPeliculas.updateOne(eq("nombre", nombrePeliculaModificar), set("duracion", duracion));
     }
 
-    public void modificarValoracionPelicula(String nombrePeliculaModificar) {
+    public static void modificarValoracionPelicula(String nombrePeliculaModificar) {
         double valoracion = 0;
         try {
             System.out.println("Introduzca la valoracion de la pelicula");
-            valoracion = Double.parseDouble(p.br.readLine());
+            valoracion = Double.parseDouble(br.readLine());
         } catch (IOException ioe) {
             System.out.println("Error");
         }
-        //p.coleccionPeliculas.updateOne(eq("nombre", nombrePeliculaModificar), set("valoracion", valoracion));
+        coleccionPeliculas.updateOne(eq("nombre", nombrePeliculaModificar), set("valoracion", valoracion));
     }
 
-    public void modificarFechaEstrenoPelicula(String nombrePeliculaModificar) {
+    public static void modificarFechaEstrenoPelicula(String nombrePeliculaModificar) {
         String fechaPelicula = null;
         try {
             System.out.println("Introduzca la fechaPelicula de la pelicula");
-            fechaPelicula = p.br.readLine();
+            fechaPelicula = br.readLine();
         } catch (IOException ioe) {
             System.out.println("Error");
         }
-        //p.coleccionPeliculas.updateOne(eq("nombre", nombrePeliculaModificar), set("fecha", fechaPelicula));
+        coleccionPeliculas.updateOne(eq("nombre", nombrePeliculaModificar), set("fecha", fechaPelicula));
     }
 
-    public void modificarPublicoPelicula(String nombrePeliculaModificar) {
+    public static void modificarPublicoPelicula(String nombrePeliculaModificar) {
         boolean mayorDeEdad = false;
         try {
             System.out.println("Introduzca si la pelicula es mayor de 18 anio");
-            mayorDeEdad = Boolean.parseBoolean(p.br.readLine());
+            mayorDeEdad = Boolean.parseBoolean(br.readLine());
         } catch (IOException ioe) {
             System.out.println("Error");
         }
-       // p.coleccionPeliculas.updateOne(eq("nombre", nombrePeliculaModificar), set("publico", mayorDeEdad));
+        coleccionPeliculas.updateOne(eq("nombre", nombrePeliculaModificar), set("publico", mayorDeEdad));
     }
 
 
