@@ -1,19 +1,14 @@
 package proyecto;
 
-import com.mongodb.MongoClient;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
-import com.mongodb.client.MongoDatabase;
-import org.bson.Document;
 
+import org.bson.Document;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.mongodb.client.model.Filters.eq;
-
 public class Comprobar {
+    //Clase que sirve para comprobar los datos que introduce el usuario
 
     public static boolean comprobarNombrePelicula(String nombre) {
         boolean comprobado = false;

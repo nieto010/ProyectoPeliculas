@@ -12,7 +12,7 @@ import static proyecto.Principal.coleccionPeliculas;
 
 public class ModificarPelicula {
 
-    public static void modificarNombrePelicula(String nombrePeliculaModificar) {
+    public static void modificarNombrePelicula(String nombrePeliculaModificar) { //Metodo para modificar el nombre de la pelicula
         String nombrePelicula = null;
         try {
             System.out.println("Introduzca el nombre que desee poner a la pelicula");
@@ -27,7 +27,7 @@ public class ModificarPelicula {
         }
     }
 
-    public static void modificarDirectorPelicula(String nombrePeliculaModificar) {
+    public static void modificarDirectorPelicula(String nombrePeliculaModificar) { //Metodo para modificar el director de la pelicula
         String nombreDirector = null;
         try {
             System.out.println("Introduzca el nombre del director que realizo la pelicula");
@@ -42,7 +42,7 @@ public class ModificarPelicula {
         }
     }
 
-    public static void modificarSipnosisPelicula(String nombrePeliculaModificar) {
+    public static void modificarSipnosisPelicula(String nombrePeliculaModificar) { //Metodo para modificar la sinopsis de la pelicula
         String sipnosis = null;
         try {
             System.out.println("Introduzca la sipnosis de la pelicula");
@@ -53,7 +53,7 @@ public class ModificarPelicula {
         coleccionPeliculas.updateMany(eq("nombre", nombrePeliculaModificar), set("sipnosis", sipnosis));
     }
 
-    public static void modificarDuracionPelicula(String nombrePeliculaModificar) {
+    public static void modificarDuracionPelicula(String nombrePeliculaModificar) { //Metodo para modificar la duracion de la pelicula
         String duracion = null;
         int duracionValida = 0;
         try {
@@ -72,7 +72,7 @@ public class ModificarPelicula {
         }
     }
 
-    public static void modificarValoracionPelicula(String nombrePeliculaModificar) {
+    public static void modificarValoracionPelicula(String nombrePeliculaModificar) { //Metodo para modificar la valoracion de la pelicula
         double valoracionValida = 0;
         String valoracion;
         try {
@@ -92,7 +92,7 @@ public class ModificarPelicula {
 
     }
 
-    public static void modificarFechaEstrenoPelicula(String nombrePeliculaModificar) {
+    public static void modificarFechaEstrenoPelicula(String nombrePeliculaModificar) { // Metodo para modificar la fecha de estreno de la pelicula
         String fechaPelicula = null;
         try {
             System.out.println("Introduzca la fecha de la pelicula (__-__-____)");
@@ -107,7 +107,7 @@ public class ModificarPelicula {
         }
     }
 
-    public static void modificarPublicoPelicula(String nombrePeliculaModificar) {
+    public static void modificarPublicoPelicula(String nombrePeliculaModificar) { //Metodo para modificar si la pelicula es para mayor de edad
         boolean mayorDeEdadValido = false;
         String mayorDeEdad;
         try {

@@ -10,11 +10,12 @@ import static proyecto.Principal.*;
 
 public class Insertar{
 
-    public static void insertarPelicula() {
+    public static void insertarPelicula() { //Metodo para insertar una pelicula
         String nombrePelicula = null, sinopsis = null, fecha = null, director = null,mayorDeEdad = null,valoracion = null, duracion = null,genero = null, continuar;
         int duracionValida = 0;
         double valoracionValida = 0;
         Boolean seguir = false;
+        //El usuario va a tener que ingresar todos los campos que tiene una pelicula
         while (!seguir) {
             try {
                 System.out.println("Introduzca el nombre que desee poner a la pelicula");
@@ -115,6 +116,7 @@ public class Insertar{
                 System.out.println("Error");
             }
         }
+        //Creamos un documento para introducirlo en la coleccion peliculas
         Document nuevaPelicula = new Document();
         nuevaPelicula.put("nombre", nombrePelicula);
         nuevaPelicula.put("sinopsis", sinopsis);
@@ -130,9 +132,10 @@ public class Insertar{
             try {
                 genero = br.readLine();
                 if (!Comprobar.comprobarNombreGenero(genero)) {
-                    if (!Comprobar.comprobarGeneroExistente(genero)) {
-                        insertarGenero(genero, nombrePelicula);
-                    } else {
+                    if (!Comprobar.comprobarGeneroExistente(genero)) { //Comprobamos si el genero existe
+                        insertarGenero(genero, nombrePelicula); //Si el genero no existe creamos uno nuevo llamando al metodo insertarMetodo recibiendo
+                        //por parametro el nombre del genero y el nombre de la pelicula
+                    } else { //Si existe actualizaremos la pelicula metiendo los generos de la pelicula
                         coleccionPeliculas.updateMany(eq("nombre",nombrePelicula), push("generos", genero));
                         coleccionGenero.updateMany(eq("nombre", genero), push("peliculas", nombrePelicula));
                     }
@@ -169,7 +172,7 @@ public class Insertar{
 
     }
     
-    public static void insertarGenero() {
+    public static void insertarGenero() { //Metodo que se llama desde el menu de CRUD para introducir un nuevo genero
         String nombreGenero = null, descripcionGenero = null;
         boolean seguir = false;
         while (!seguir) {
@@ -205,7 +208,7 @@ public class Insertar{
 
     }
 
-    public static void insertarGenero(String nombreGenero, String nombrePelicula) {
+    public static void insertarGenero(String nombreGenero, String nombrePelicula) { //Metodo que se llama desde el insertarPelicula cuando el genero no exista
         String descripcionGenero = null;
         boolean seguir = true;
         while (seguir) {

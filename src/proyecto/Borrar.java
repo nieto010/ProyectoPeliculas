@@ -12,7 +12,7 @@ import static proyecto.Principal.*;
 
 public class Borrar {
 
-    public static void borrarPelicula() {
+    public static void borrarPelicula() { //Metodo para borrar una pelicula
         List<Document> consultaPeliculas = coleccionPeliculas.find().into(new ArrayList<>());
         String nombrePelicula = null;
         System.out.println("Listado de peliculas:");
@@ -27,7 +27,7 @@ public class Borrar {
         } catch (IOException ioe) {
             System.err.println("Error de E/S");
         }
-        if (nombrePelicula.equalsIgnoreCase("salir")) {
+        if (nombrePelicula.equalsIgnoreCase("salir")) { //Comprueba si el usuario ha introducido salir
             System.out.println("SALIENDO...");
             System.out.println();
         } else {
@@ -47,7 +47,7 @@ public class Borrar {
         }
     }
 
-    public static void borrarGenero() {
+    public static void borrarGenero() { //Metodo para borrar un genero
         List<Document> consultaGenero = coleccionGenero.find().into(new ArrayList<>());
         String nombreGenero = null;
         System.out.println("Listado de peliculas:");

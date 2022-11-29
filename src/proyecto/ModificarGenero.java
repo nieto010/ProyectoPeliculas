@@ -12,7 +12,7 @@ import static proyecto.Principal.br;
 public class ModificarGenero {
 
 
-    public static void modificarNombreGenero(String nombreGeneroModificar) {
+    public static void modificarNombreGenero(String nombreGeneroModificar) { //Metodo para modificar el nombre del genero
         String nombreGenero = null;
         try {
             System.out.println("Introduzca el nombre que desee poner al genero");
@@ -28,7 +28,7 @@ public class ModificarGenero {
 
     }
 
-    public static void modificarDescripcion(String nombreGeneroModificar) {
+    public static void modificarDescripcion(String nombreGeneroModificar) { //Metodo para modificar la descripcion del genero
         String descripcionGenero = null;
         try {
             System.out.println("Introduzca la descripcion que desee poner al genero");
