@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="31cb53df-75cb-4f75-8eda-5f91be4c5bd9" name="Changes" comment="CRUD v2">
-      <change beforePath="$PROJECT_DIR$/src/proyecto/Borrar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/proyecto/Borrar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/proyecto/Comprobar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/proyecto/Comprobar.java" afterDir="false" />
+    <list default="true" id="31cb53df-75cb-4f75-8eda-5f91be4c5bd9" name="Changes" comment="CRUD v2.1">
       <change beforePath="$PROJECT_DIR$/src/proyecto/Insertar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/proyecto/Insertar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/proyecto/ModificarGenero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/proyecto/ModificarGenero.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/proyecto/ModificarPelicula.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/proyecto/ModificarPelicula.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +82,7 @@
       <workItem from="1669624401901" duration="1534000" />
       <workItem from="1669635934136" duration="2355000" />
       <workItem from="1669646925321" duration="13383000" />
-      <workItem from="1669707276899" duration="9344000" />
+      <workItem from="1669707276899" duration="9806000" />
     </task>
     <task id="LOCAL-00001" summary="CRUD v1">
       <created>1669385444776</created>
@@ -158,7 +154,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669717509261</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="CRUD v2.1">
+      <created>1669718433151</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1669718433151</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -185,6 +188,7 @@
     <MESSAGE value="CRUD v1.5" />
     <MESSAGE value="CRUD v1.6" />
     <MESSAGE value="CRUD v2" />
-    <option name="LAST_COMMIT_MESSAGE" value="CRUD v2" />
+    <MESSAGE value="CRUD v2.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="CRUD v2.1" />
   </component>
 </project>

@@ -115,11 +115,14 @@ public class ModificarPelicula {
             mayorDeEdad = br.readLine();
             if (Comprobar.comprobarBoolean(mayorDeEdad)) {
                 mayorDeEdadValido = Boolean.parseBoolean(mayorDeEdad);
+                coleccionPeliculas.updateMany(eq("nombre", nombrePeliculaModificar), set("publico", mayorDeEdadValido));
+            } else {
+                System.err.println("Introduce true o false");
             }
         } catch (IOException ioe) {
             System.out.println("Error");
         }
-        coleccionPeliculas.updateMany(eq("nombre", nombrePeliculaModificar), set("publico", mayorDeEdadValido));
+
     }
 
 

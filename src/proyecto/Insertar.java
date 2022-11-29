@@ -71,7 +71,6 @@ public class Insertar{
             mayorDeEdad = br.readLine();
             if(Comprobar.comprobarBoolean(mayorDeEdad)) {
                 seguir=false;
-
             } else{
                 System.out.println("Introduza true o false por favor");
             }
