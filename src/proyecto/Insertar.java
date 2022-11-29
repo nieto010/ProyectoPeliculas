@@ -6,9 +6,7 @@ import java.io.IOException;
 
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Updates.push;
-import static com.mongodb.client.model.Updates.set;
-import static proyecto.Principal.br;
-import static proyecto.Principal.coleccionPeliculas;
+import static proyecto.Principal.*;
 
 public class Insertar{
 
@@ -25,7 +23,7 @@ public class Insertar{
                     if (!Comprobar.comprobarPeliculaExistente(nombrePelicula)) {
                         seguir = true;
                     } else {
-                        System.out.println("Esta pelicula ya existe");
+                        System.err.println("Esta pelicula ya existe");
                     }
                 } else {
                     System.out.println("Introduce un nombre valido");
@@ -57,7 +55,7 @@ public class Insertar{
         System.out.println("Introduce el nombre del director: ");
         try {
             director = br.readLine();
-            if (!Comprobar.comprobarNombreDirectorPelicula(director)) {
+            if (Comprobar.comprobarNombreDirectorPelicula(director)) {
                 seguir = true;
             } else {
                 System.out.println("El nombre del director no es valido");
@@ -84,7 +82,8 @@ public class Insertar{
             try {
                 valoracion = br.readLine();
                 if (Comprobar.comprobarNumeroDouble(valoracion)) {
-                    if (!Comprobar.comprobarValoracionPelicula(valoracionValida)){
+                    valoracionValida = Double.parseDouble(valoracion);
+                    if (Comprobar.comprobarValoracionPelicula(valoracionValida)){
                         seguir=true;
                     } else {
                         System.out.println("Introduzca una valoración valida");
@@ -103,10 +102,10 @@ public class Insertar{
                 duracion= br.readLine();
                 if (Comprobar.comprobarDuracionPelicula(duracion)){
                     duracionValida = Integer.parseInt(duracion);
-                    if(!Comprobar.comprobarDuracionPelicula(duracionValida)){
+                    if(Comprobar.comprobarDuracionPelicula(duracionValida)){
                         seguir=false;
                     }else{
-                        System.out.println("Introduzca una duración valida");
+                        System.out.println("Introduzca una duración valida (La duracion debe ser mayor de 30 min)");
                     }
                 } else {
                     System.out.println("Introduzca un numero por favor");
@@ -120,9 +119,10 @@ public class Insertar{
         nuevaPelicula.put("nombre", nombrePelicula);
         nuevaPelicula.put("sinopsis", sinopsis);
         nuevaPelicula.put("fecha", fecha);
+        nuevaPelicula.put("director", director);
         nuevaPelicula.put("mayorDeEdad", mayorDeEdad);
         nuevaPelicula.put("valoracion", valoracionValida);
-        nuevaPelicula.put("duracion", duracionValida);
+        nuevaPelicula.put("duracion", duracionValida + " min");
         coleccionPeliculas.insertOne(nuevaPelicula);
         boolean bandera = true;
         while (bandera) {
@@ -131,21 +131,25 @@ public class Insertar{
                 genero = br.readLine();
                 if (!Comprobar.comprobarNombreGenero(genero)) {
                     if (!Comprobar.comprobarGeneroExistente(genero)) {
-                        insertarGenero();
+                        insertarGenero(genero, nombrePelicula);
                     } else {
                         coleccionPeliculas.updateMany(eq("nombre",nombrePelicula), push("generos", genero));
+                        coleccionGenero.updateMany(eq("nombre", genero), push("peliculas", nombrePelicula));
                     }
                 } else {
                     System.out.println("Introduce un nombre de un genero valido");
                 }
+                seguir = false;
                 while (!seguir) {
                     System.out.println("¿Quieres insertar otro género?(Y/N)");
                     continuar = br.readLine();
                     if (Comprobar.comprobarSeguirString(continuar)) {
                         if (continuar.equalsIgnoreCase("Y")) {
                             bandera = true;
+                            seguir = true;
                         } else if (continuar.equalsIgnoreCase("N")) {
                             bandera = false;
+                            System.out.println("Se ha insertado la pelicula " + nombrePelicula);
                             break;
                         }
                     } else {
@@ -166,6 +170,61 @@ public class Insertar{
     }
     
     public static void insertarGenero() {
-        
+        String nombreGenero = null, descripcionGenero = null;
+        boolean seguir = false;
+        while (!seguir) {
+            try {
+                System.out.println("Introduzca el nombre que desee poner al genero");
+                nombreGenero = br.readLine();
+                if (Comprobar.comprobarNombreGenero(nombreGenero)) {
+                    seguir = true;
+                } else {
+                    System.out.println("Introduzca un nombre de un genero valido");
+                }
+            } catch (IOException ioe) {
+                System.out.println("Error");
+            }
+        }
+        while (seguir) {
+            try {
+                System.out.println("Introduzca la descripcion que desee poner al genero");
+                descripcionGenero = br.readLine();
+                if (Comprobar.comprobarDescripcionGenero(descripcionGenero)) {
+                    seguir = false;
+                } else {
+                    System.out.println("Introduce una descripcion valida");
+                }
+            } catch (IOException ioe) {
+                System.out.println("Error");
+            }
+        }
+        Document nuevoGenero = new Document();
+        nuevoGenero.put("nombre", nombreGenero);
+        nuevoGenero.put("descripcion", descripcionGenero);
+        coleccionGenero.insertOne(nuevoGenero);
+
+    }
+
+    public static void insertarGenero(String nombreGenero, String nombrePelicula) {
+        String descripcionGenero = null;
+        boolean seguir = true;
+        while (seguir) {
+            try {
+                System.out.println("Introduzca la descripcion que desee poner al genero");
+                descripcionGenero = br.readLine();
+                if (Comprobar.comprobarDescripcionGenero(descripcionGenero)) {
+                    seguir = false;
+                } else {
+                    System.out.println("Introduce una descripcion valida");
+                }
+            } catch (IOException ioe) {
+                System.out.println("Error");
+            }
+        }
+        Document nuevoGenero = new Document();
+        nuevoGenero.put("nombre", nombreGenero);
+        nuevoGenero.put("descripcion", descripcionGenero);
+        coleccionGenero.insertOne(nuevoGenero);
+        coleccionGenero.updateMany(eq("nombre", nombreGenero), push("Peliculas", nombrePelicula));
     }
 }

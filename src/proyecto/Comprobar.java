@@ -2,12 +2,16 @@ package proyecto;
 
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static com.mongodb.client.model.Filters.eq;
 
 public class Comprobar {
 
@@ -32,11 +36,9 @@ public class Comprobar {
     }
 
     public static boolean comprobarNombreDirectorPelicula(String nombreDirector) {
-        if (nombreDirector.matches("[a-zA-Z]")){
-            return true;
-        } else {
-            return false;
-        }
+        Pattern pat = Pattern.compile("[^ + - * / = % & # ! ? ^  “ ‘ ~ \\ | < > ( ) [ ] { } : ; . , $ · € ~ ¬ { } € ]");
+        Matcher m = pat.matcher(nombreDirector);
+        return !m.matches();
     }
 
     public static boolean comprobarDuracionPelicula(int duracion) {
@@ -48,19 +50,17 @@ public class Comprobar {
     }
 
     public static boolean comprobarValoracionPelicula(double valoracion) {
-        if (valoracion < 5 && valoracion > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return valoracion <= 5 && valoracion >= 0;
     }
 
     public static boolean comprobarNombreGenero(String nombreGenero) {
-        return nombreGenero.matches("[a-zA-Z]");
+        return nombreGenero.matches("a-zA-Z");
     }
 
     public static boolean comprobarDescripcionGenero(String descripcionGenero) {
-        return descripcionGenero.matches("a-zA-Z_0-9");
+        Pattern pat = Pattern.compile("[^ + - * / = % & # ! ? ^  “ ‘ ~ \\ | < > [ ] { } : ; $ · € ~ ¬ { } € ]");
+        Matcher m = pat.matcher(descripcionGenero);
+        return !m.matches();
     }
 
     public static boolean comprobarNumeroMenu(String opcionMenu) {
@@ -76,16 +76,12 @@ public class Comprobar {
     }
 
     public static boolean comprobarPeliculaExistente(String nombrePelicula) {
+        List<Document> consultaPeliculas = Principal.coleccionPeliculas.find().into(new ArrayList<>());
         int i = 0;
         boolean encontrado = false;
-        MongoClient cliente = new MongoClient();
-        MongoDatabase db = cliente.getDatabase("test");
-        MongoCollection<Document> coleccion = db.getCollection("peliculas");
-        ArrayList<Document> consultaPeliculas = coleccion.find().into(new ArrayList<Document>());
         while (i < consultaPeliculas.size() && !encontrado) {
             Document pelicula = consultaPeliculas.get(i);
             if (nombrePelicula.equalsIgnoreCase(pelicula.getString("nombre"))){
-                System.out.println("encontrado");
                 encontrado = true;
             } else {
                 i++;
@@ -95,16 +91,12 @@ public class Comprobar {
     }
 
     public static boolean comprobarGeneroExistente(String nombreGenero) {
+        List<Document> consultaGenero = Principal.coleccionGenero.find().into(new ArrayList<>());
         int i = 0;
         boolean encontrado = false;
-        MongoClient cliente = new MongoClient();
-        MongoDatabase db = cliente.getDatabase("test");
-        MongoCollection<Document> coleccion = db.getCollection("generos");
-        ArrayList<Document> consultaPeliculas = coleccion.find().into(new ArrayList<Document>());
-        while (i < consultaPeliculas.size() && !encontrado) {
-            Document genero = consultaPeliculas.get(i);
+        while (i < consultaGenero.size() && !encontrado) {
+            Document genero = consultaGenero.get(i);
             if (nombreGenero.equalsIgnoreCase(genero.getString("nombre"))){
-                System.out.println("encontrado");
                 encontrado = true;
             } else {
                 i++;

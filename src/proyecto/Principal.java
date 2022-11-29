@@ -26,6 +26,74 @@ public class Principal {
         menu();
     }
 
+    public static void cargaInicial() {
+        Document genero1 = new Document();
+        genero1.put("nombre", "Drama");
+        genero1.put("descripcion", "El drama es un genero que trata situaciones generalmente no é¡epicas en un contexto serio");
+
+        Document genero2 = new Document();
+        genero2.put("nombre", "Misterio");
+        genero2.put("descripcion", "El misterio es un genero que trata de investigaciones de crimenes");
+
+        Document genero3 = new Document();
+        genero3.put("nombre", "Superheroes");
+        genero3.put("descripcion", "Peliculas que se basan en personas que tienen superpoderes y necesitan salvar el mundo");
+
+        Document pelicula1 = new Document();
+        pelicula1.put("nombre", "Cadena perpetua");
+        pelicula1.put("sinopsis", "Primera realizacion cinematografica de un director que habia conseguido" +
+                " cierto prestigio en la television, en la que adapto un atipico relato de Stephen King. A traves de" +
+                " la tradicional estructura del melodrama carcelario, propone una fabula entre fantasiosa y voluntarista, con" +
+                " imaginativos recovecos. Sin llegar a la excelencia, supuso una agradable sorpresa");
+        pelicula1.put("fecha", "24/02/1995");
+        pelicula1.put("director", "Frank Darabont");
+        pelicula1.put("mayorDeEdad", true);
+        pelicula1.put("valoracion", 4.2);
+        pelicula1.put("duracion", "130min");
+        pelicula1.put("generos", genero2.getString("nombre"));
+
+        Document pelicula2 = new Document();
+        pelicula2.put("nombre", "El padrino");
+        pelicula2.put("sinopsis", "Adaptacion de una celebrada novela de Mario Puzo, en la que se revisaba la mitica mafiosa a traves de una mirada que pretendía comprender su razon de ser desde la Historia " +
+                "y la tradicion ancestral. Con este prometedor material, Coppola construyo una de las grandes tragedias del cine contemporaneo, donde el cine " +
+                "negro alcanzaba resonancias shakespearianas. Contra todo pronostico, sus secuelas estuvieron a su altura");
+        pelicula2.put("fecha", "24/05/1972");
+        pelicula2.put("director", "Francis Ford Coppola");
+        pelicula2.put("mayorDeEdad", true);
+        pelicula2.put("valoracion", 4.8);
+        pelicula2.put("duracion", "90min");
+        pelicula2.put("generos", genero1.getString("nombre"));
+
+        Document pelicula3 = new Document();
+        pelicula3.put("nombre", "El caballero oscuro");
+        pelicula3.put("sinopsis", "El Caballero Oscuro' desmiente su condicion inicial de blockbuster revienta " +
+                "taquilla con una serie de argumentos esteticos, interpretativos, emocionales, filosoficos e " +
+                "ideologicos que la propulsan muy por encima de cualquier otra adaptacion de comic que hayamos visto " +
+                "hasta la fecha. Sin renunciar a las concesiones propias del cine espectaculo, pero dotadas estas " +
+                "de una elegancia, tenebrosidad y radicalidad alejada de la orbita mainstream, Christopher Nolan " +
+                "profundiza hasta las ultimas consecuencias en la psicologia de sus personajes centrales y obra " +
+                "el milagro con una historia de aires shakespearianos en clave apocaliptica que te deja con un " +
+                "mal cuerpo indescriptible");
+        pelicula3.put("fecha", "24/10/2008");
+        pelicula3.put("director", "Christopher Nolan");
+        pelicula3.put("mayorDeEdad", false);
+        pelicula3.put("valoracion", 4.0);
+        pelicula3.put("duracion", "98min");
+        pelicula3.put("generos", genero3.getString("nombre"));
+
+        genero1.put("peliculas", pelicula2.getString("nombre"));
+        genero2.put("peliculas", pelicula1.getString("nombre"));
+        genero3.put("peliculas", pelicula3.getString("nombre"));
+        coleccionGenero.insertOne(genero1);
+        coleccionGenero.insertOne(genero2);
+        coleccionGenero.insertOne(genero3);
+
+        coleccionPeliculas.insertOne(pelicula1);
+        coleccionPeliculas.insertOne(pelicula2);
+        coleccionPeliculas.insertOne(pelicula3);
+
+    }
+
     private static void menu() throws NumberFormatException, IOException {
         String opcion = null;
         int opcionValida = 100;
@@ -172,7 +240,7 @@ public class Principal {
                     listadoGeneros();
                     break;
                 case 2:
-                    //crearGeneros();
+                    Insertar.insertarGenero();
                     break;
                 case 3:
                     borrarGenero();
@@ -234,7 +302,7 @@ public class Principal {
         try {
             System.out.println("-Introduce el nombre de la pelicula que quieres buscar: ");
             String nombreP = br.readLine();
-            if (!comprobarPeliculaExistente(nombreP)) {
+            if (!Comprobar.comprobarPeliculaExistente(nombreP)) {
                 System.out.println("Esta pelicula no existe");
             } else {
                 while (i < consultaPeliculas.size() && !buscar) {
@@ -243,7 +311,7 @@ public class Principal {
 
                         System.out.println("Nombre: " + pel.getString("nombre") + "\nSipnosis: " + pel.get("sinopsis") + "\nFecha de estreno: "
                                 + pel.get("fecha") + "\nDirector: " + pel.get("director") + "\nMayor de 18 anios: " + pel.get("publico") + "\nValoracion:"
-                                + pel.get("valoracion") + "\nDuracion: " + pel.get("duracion") + "\nGeneros: " + pel.get("genero"));
+                                + pel.get("valoracion") + "\nDuracion: " + pel.get("duracion") + "\nGeneros: " + pel.get("generos"));
                     } else {
                         i++;
                     }
@@ -266,7 +334,7 @@ public class Principal {
         try {
             System.out.println("-Introduce el nombre del género de la pelicula que quieres buscar: ");
             String nombreGen = br.readLine();
-            if (comprobarGeneroExistente(nombreGen)) {
+            if (Comprobar.comprobarGeneroExistente(nombreGen)) {
                 while (i < consultaGenero.size() && !buscar) {
                     Document genero = consultaGenero.get(i);
                     System.out.println(genero.getString("nombre"));
@@ -304,7 +372,7 @@ public class Principal {
             System.out.println("SALIENDO...");
             System.out.println();
         } else {
-            if (!comprobarPeliculaExistente(nombrePeliculaModificar)) {
+            if (!Comprobar.comprobarPeliculaExistente(nombrePeliculaModificar)) {
                 System.err.println("El nombre de la pelicula no existe");
                 modificarPelicula();
             } else {
@@ -367,7 +435,7 @@ public class Principal {
                     System.out.println(" ");
                     break;
                 default:
-                    System.out.println("Introduzca un numero del 0 al 2");
+                    System.out.println("Introduzca un numero del 0 al 7");
                     break;
             }
         } while (opcionValida != 0) ;
@@ -383,7 +451,7 @@ public class Principal {
                 System.out.println("SALIENDO...");
                 System.out.println();
             } else {
-                if (!comprobarGeneroExistente(nombreGeneroModificar)) {
+                if (!Comprobar.comprobarGeneroExistente(nombreGeneroModificar)) {
                     System.err.println("El nombre del genero no existe");
                     modificarGenero();
                 } else {
@@ -424,7 +492,7 @@ public class Principal {
                     ModificarGenero.modificarDescripcion(nombreGenero);
                     break;
                 case 0:
-                    System.out.println(" ");
+                    System.out.println("");
                     break;
                 default:
                     System.out.println("Introduzca un numero del 0 al 2");
@@ -432,36 +500,6 @@ public class Principal {
             }
         } while (opcionValida != 0);
 
-    }
-
-    public static boolean comprobarPeliculaExistente(String nombrePelicula) {
-        List<Document> consultaPeliculas = coleccionPeliculas.find().into(new ArrayList<>());
-        int i = 0;
-        boolean encontrado = false;
-        while (i < consultaPeliculas.size() && !encontrado) {
-            Document pelicula = consultaPeliculas.get(i);
-            if (nombrePelicula.equalsIgnoreCase(pelicula.getString("nombre"))){
-                encontrado = true;
-            } else {
-                i++;
-            }
-        }
-        return encontrado;
-    }
-
-    public static boolean comprobarGeneroExistente(String nombreGenero) {
-        List<Document> consultaGenero = coleccionGenero.find().into(new ArrayList<>());
-        int i = 0;
-        boolean encontrado = false;
-        while (i < consultaGenero.size() && !encontrado) {
-            Document genero = consultaGenero.get(i);
-            if (nombreGenero.equalsIgnoreCase(genero.getString("nombre"))){
-                encontrado = true;
-            } else {
-                i++;
-            }
-        }
-        return encontrado;
     }
 
     public static void borrarPelicula() {
@@ -483,14 +521,14 @@ public class Principal {
             System.out.println("SALIENDO...");
             System.out.println();
         } else {
-            if (!comprobarPeliculaExistente(nombrePelicula)) {
+            if (!Comprobar.comprobarPeliculaExistente(nombrePelicula)) {
                 System.err.println("Esta pelicula no existe");
                 borrarPelicula();
             } else {
                 for (int i = 0; i < consultaPeliculas.size(); i++) {
                     Document peliculas = consultaPeliculas.get(i);
                     if (peliculas.getString("nombre").equalsIgnoreCase(nombrePelicula)) {
-                        DeleteResult delPelicula = coleccionGenero.deleteOne(eq("peliculas", peliculas.getString("_id")));
+                        DeleteResult delPelicula = coleccionGenero.deleteOne(eq("peliculas", peliculas.getString("nombre")));
                     }
                 }
                 DeleteResult del = coleccionPeliculas.deleteMany(eq("nombre", nombrePelicula));
@@ -518,13 +556,13 @@ public class Principal {
             System.out.println("SALIENDO...");
             System.out.println();
         } else {
-            if (!comprobarGeneroExistente(nombreGenero)) {
+            if (!Comprobar.comprobarGeneroExistente(nombreGenero)) {
                 System.err.println("Este genero no existe");
             } else {
                 for (int i = 0; i < consultaGenero.size(); i++) {
                     Document generos = consultaGenero.get(i);
                     if (generos.getString("nombre").equalsIgnoreCase(nombreGenero)) {
-                        DeleteResult delID = coleccionPeliculas.deleteOne(eq("generos", generos.getString("_id")));
+                        DeleteResult delID = coleccionPeliculas.deleteOne(eq("generos", generos.getString("nombre")));
                     }
                 }
                 DeleteResult del = coleccionGenero.deleteOne(eq("nombre", nombreGenero));
@@ -536,7 +574,11 @@ public class Principal {
     public static void listadoPeliculas() {
         List<Document> consultaPeliculas = coleccionPeliculas.find().into(new ArrayList<>());
         for (int i = 0; i < consultaPeliculas.size(); i++) {
-            System.out.println(i + 1 +".- " + consultaPeliculas.get(i).toString());
+            Document pelicula = consultaPeliculas.get(i);
+            System.out.println("Pelicula " + (i+1));
+            System.out.println("Nombre: " + pelicula.getString("nombre") + "\nSipnosis: " + pelicula.get("sinopsis") + "\nFecha de estreno: "
+                    + pelicula.get("fecha") + "\nDirector: " + pelicula.getString("director") + "\nMayor de 18 anios: " + pelicula.get("mayorDeEdad") + "\nValoracion:"
+                    + pelicula.get("valoracion") + "\nDuracion: " + pelicula.get("duracion") + "\nGeneros: " + pelicula.get("generos"));
         }
     }
 
@@ -544,6 +586,7 @@ public class Principal {
         List<Document> consultaGenero = coleccionGenero.find().into(new ArrayList<>());
         for (int i = 0; i < consultaGenero.size(); i++) {
             Document genero = consultaGenero.get(i);
+            System.out.println("Genero " + (i+1));
             System.out.println("Nombre: " + genero.getString("nombre") + "\nDescripcion: " + genero.get("descripcion") + "\nPeliculas: "
                     + genero.get("peliculas"));
         }
